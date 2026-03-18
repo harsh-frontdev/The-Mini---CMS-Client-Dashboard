@@ -9,10 +9,11 @@ if(projectsList === null){
 const clientNameEl = document.querySelector('#client-name');
 const platformEl = document.querySelector('#platform');
 const budgetEl = document.querySelector('#budget');
-const submitEl = document.querySelector('#submit');
+const clientForm = document.querySelector('#client-form');
 const searchBarEl = document.querySelector('#search-bar');
 const syncBtnEl = document.querySelector('#sync-btn');
 const projectTableEl = document.querySelector('#project-table');
+const projectBodyEl = document.querySelector('#project-body');
 
 // Project Class
 class Project {
@@ -26,11 +27,20 @@ class Project {
         return `$${this.budget}`;
     }
 }
-
 const newProject = new Project('Car', 'Script', 100);
 
 // Render Table with Data
 function renderTable(data){
-    console.log(data);
+    if(data){
+        console.log(data);
+    }else {
+        projectBodyEl.innerHTML += `<tr><td colspan="5" style="text-align: center;">No Client Found</td></tr>`;
+    }
 }
 renderTable(projectsList);
+
+// Add Project on Click
+clientForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('Got Data');
+})
