@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mini - CMS Client Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cms-container">
+        <h1>Client Project CMS</h1>
+
+        <form id="client-form">
+            <input type="text" id="client-name" placeholder="Client Name" required>
+            <select id="platform">
+                <option value="WordPress">WordPress</option>
+                <option value="Webflow">Webflow</option>
+            </select>
+            <input type="number" id="budget" placeholder="Budget ($)" required>
+            <button type="submit">Add Project</button>
+        </form>
+
+        <div class="controls">
+            <input type="text" id="search-bar" placeholder="Search by client...">
+            <button id="sync-btn">Sync to Cloud</button>
+        </div>
+
+        <table id="project-table">
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Platform</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="project-body"></tbody>
+        </table>
+
+        <div id="loader" class="hidden">Syncing with server...</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 20px; }
+.cms-container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; margin-bottom: 30px; }
+input, select { padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { text-align: left; padding: 15px; border-bottom: 1px solid #eee; }
+th { background: #f8f9fa; color: #333; }
+.status-badge { padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; background: #e3f2fd; color: #1976d2; }
+#sync-btn { background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+.hidden { display: none; }
+#loader { text-align: center; margin-top: 10px; color: #6c5ce7; font-weight: bold; }
+.del-btn { color: #e74c3c; cursor: pointer; background: none; border: none; font-weight: bold; }
