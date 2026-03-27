@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mini - CMS Client Dashboard</title>
+    <title>Advanced Client CMS - Modular</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="cms-container">
-        <h1>Client Project CMS</h1>
 
+    <div class="cms-container">
+        <h1>Client Project CMS <span class="badge">Modular</span></h1>
+        
         <form id="client-form">
             <input type="text" id="client-name" placeholder="Client Name" required>
             <select id="platform">
@@ -19,30 +18,53 @@
                 <option value="Webflow">Webflow</option>
             </select>
             <input type="number" id="budget" placeholder="Budget ($)" required>
-            <button type="submit">Add Project</button>
+            <button type="submit" id="add-btn">Add Project</button>
         </form>
 
+        <hr>
+
         <div class="controls">
-            <input type="text" id="search-bar" placeholder="Search by client...">
-            <button id="sync-btn">Sync to Cloud</button>
+            <div class="filter-group">
+                <label>Search Name</label>
+                <input type="text" id="search-bar" placeholder="e.g. 'Apple'">
+            </div>
+            
+            <div class="filter-group">
+                <label>Budget Range</label>
+                <div class="range-inputs">
+                    <input type="number" id="min-budget" placeholder="Min $">
+                    <input type="number" id="max-budget" placeholder="Max $">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>&nbsp;</label>
+                <button id="sync-btn">Sync to Cloud</button>
+            </div>
         </div>
 
-        <table id="project-table">
-            <thead>
-                <tr>
-                    <th>Client</th>
-                    <th>Platform</th>
-                    <th>Budget</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="project-body"></tbody>
-        </table>
-
-        <div id="loader" class="hidden">Syncing with server...</div>
+        <div class="table-wrapper">
+            <table id="project-table">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Platform</th>
+                        <th>Budget</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="project-body">
+                    </tbody>
+            </table>
+        </div>
+        
+        <div id="loader" class="hidden">
+            <div class="spinner"></div>
+            Syncing with server...
+        </div>
     </div>
-    <script src="script.js"></script>
-</body>
 
+    <script type="module" src="app.js"></script>
+</body>
 </html>
