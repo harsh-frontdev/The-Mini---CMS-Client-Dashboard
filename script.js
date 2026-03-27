@@ -14,7 +14,8 @@ const loaderEl = document.querySelector('#loader');
 
 // Project Class
 class Project {
-    constructor(name, platform, budget){
+    constructor(id, name, platform, budget){
+        this.id = id,
         this.name = name,
         this.platform = platform,
         this.budget = budget
@@ -25,13 +26,19 @@ class Project {
     }
 }
 
+// Get Current List
+function getList(){
+    projectsList = JSON.parse(localStorage.getItem('projectsList') || '[]');
+}
+
 // Render Table with Data
 function renderTable(data){
     projectBodyEl.innerHTML = '';
+    getList();
     if(data.length){
         data.forEach(element => {
-            const project = new Project(element.name, element.platform, element.budget);
-            projectBodyEl.innerHTML += `<tr><td>${project.name}</td><td>${project.platform}</td><td>${project.formatBudget()}</td><td>Active</td><td>Delete</td></tr>`
+            const project = new Project(element.id, element.name, element.platform, element.budget);
+            projectBodyEl.innerHTML += `<tr id="${project.id}"><td>${project.name}</td><td>${project.platform}</td><td>${project.formatBudget()}</td><td>Active</td><td><a data-id="${project.id}" class="del-btn" id="del-btn">Delete</a></td></tr>`
         });
     } else {
         projectBodyEl.innerHTML = `<tr><td colspan="5" style="text-align: center;">No Client Found</td></tr>`;
@@ -53,11 +60,9 @@ clientForm.addEventListener('submit', (e) => {
 // Filter Projects
 searchBarEl.addEventListener('input', (e) => {
     const searchValue = e.target.value.toLowerCase().trim();
-
     if(searchValue.length > 0){
         projectBodyEl.innerHTML = '';
-        projectsList = JSON.parse(localStorage.getItem('projectsList') || '[]');
-        
+        getList();
         const filteredProjects = projectsList.filter((element) => element.name.toLowerCase().includes(searchValue));
         renderTable(filteredProjects);
     } else {
@@ -77,7 +82,18 @@ async function syncData(duration){
         } ,duration);
     });
 }
-
 syncBtnEl.addEventListener('click', () => {
     syncData(2000)
+});
+
+// Delete Project
+projectTableEl.addEventListener('click', (e) => {
+    if(e.target.tagName == 'A'){
+        getList();
+        const projectToRemove = Number(e.target.getAttribute('data-id'));
+        const updatedProjects = projectsList.filter((el) => el.id !== projectToRemove);
+        localStorage.setItem('projectsList', JSON.stringify(updatedProjects));
+        const updatedList = JSON.parse(localStorage.getItem('projectsList'));
+        renderTable(updatedList);
+    }
 });
